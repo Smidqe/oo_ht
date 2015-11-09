@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.FXMLController">
    <children>
-      <TabPane id="tab_main" layoutY="-212.0" prefHeight="612.0" prefWidth="600.0" style="-fx-background-insets: 0; -fx-padding: 0; -fx-pref-height: 20;" styleClass="tab_css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane id="tab_main" layoutY="-212.0" prefHeight="612.0" prefWidth="600.0" style="-fx-background-insets: 0; -fx-padding: -5,; -fx-pref-height: 2;" styleClass="tab_css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab closable="false" text="Pääikkuna">
+          <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Map">
                <content>
                   <SplitPane dividerPositions="0.7482352941176471" prefHeight="160.0" prefWidth="200.0">
                     <items>
@@ -28,7 +28,7 @@
                   </SplitPane>
                </content>
           </Tab>
-          <Tab closable="false" text="Loki">
+          <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Log">
                <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -38,7 +38,7 @@
                         <TextArea fx:id="text_area_log" editable="false" prefHeight="562.0" prefWidth="850.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children></AnchorPane>
                </content></Tab>
-            <Tab closable="false" disable="true" text="Salaisuus" />
+            <Tab closable="false" disable="true" style="-fx-padding: 0 30 0 30;" text="Secret project" />
         </tabs>
       </TabPane>
       <MenuButton fx:id="button_menu" alignment="CENTER" contentDisplay="RIGHT" layoutX="523.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="100.0" text="Valikko" textOverrun="CLIP" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
