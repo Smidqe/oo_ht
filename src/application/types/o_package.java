@@ -1,8 +1,12 @@
 package application.types;
 
+import application.types.o_enums;
+
+@SuppressWarnings("unused")
 abstract class __package {
 	o_item item;
 	
+	String location;
 	int cat_class;
 	
 	int max_size[];
@@ -18,7 +22,10 @@ abstract class __package {
 public class o_package extends __package
 {
 	/*
-
+	o_package(String item_name)
+	{
+		
+	}
 	
 
 	 */

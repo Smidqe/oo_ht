@@ -11,11 +11,11 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-	        Parent root = FXMLLoader.load(getClass().getResource("gui/FXML.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getResource("gui/main/gui_main.fxml"));
 	        
 	        Scene scene = new Scene(root);
 	        
-	        stage.initStyle(StageStyle.UNDECORATED);
+	        //stage.initStyle(StageStyle.UNDECORATED);
 	        stage.setScene(scene);
 	        
 	        stage.show();
