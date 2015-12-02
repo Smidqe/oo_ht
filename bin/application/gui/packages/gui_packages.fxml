@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.packages.gui_packages">
+   <children>
+      <SplitPane dividerPositions="0.6705685618729097" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ChoiceBox layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="194.0" />
+                  <ChoiceBox layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="194.0" />
+                  <ChoiceBox layoutX="14.0" layoutY="359.0" prefHeight="25.0" prefWidth="194.0" />
+                  <ChoiceBox layoutX="14.0" layoutY="334.0" prefHeight="25.0" prefWidth="194.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <Button layoutY="2.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="194.0" text="Pakettiluokat - Info" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutY="348.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="200.0" text="Luo paketti" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Button layoutY="49.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="200.0" text="Luo uusi esine" />
+                  <Button layoutY="299.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="200.0" text="Peruuta" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
