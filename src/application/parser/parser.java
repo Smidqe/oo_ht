@@ -27,7 +27,7 @@ public class parser {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
             SAXParser __parser = factory.newSAXParser();
-            h_post_office __handler = new h_post_office();
+            handler __handler = new handler();
 
             __parser.parse(filename, __handler);
             __parser.reset();

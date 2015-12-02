@@ -5,53 +5,52 @@ import java.util.ArrayList;
 import application.types.o_package;
 
 public class storage {
-	int max_amount_packages;
-	
-	ArrayList<o_package> packages;	
+	public int __max_amount_packages;
+	public ArrayList<o_package> __storage;
 		
-	/*
-	TODO: Methods
+		
+	//TODO: Methods
 	
-	int contains()
+	public storage()
 	{
+		__max_amount_packages = 100;
+		__storage = new ArrayList<o_package>();
 	}
 	
-	void contains(String s)
-	void contains()
-	
+	public int contains()
+	{
+		return 0;
+	}
+
 	public float filled()
 	{
-		return (packages.size() / max_amount_packages);
+		return (__storage.size() / __max_amount_packages);
 	}
 	
-	boolean filled(int min)
+	public boolean filled(int min)
 	{
 		return (filled() * 100 >= min);
 	}
 	
-	boolean isFilled()
+	public boolean isFilled()
 	{
 		return (filled() == 1);
 	}
 	
-	boolean send()
+	public o_package take(int i)
 	{
-		if packages.size() == 0
-			return false;
+		if (__storage.size() == 0)
+			return null;
 	
-		
+		return __storage.remove(i);
 	}
 	
-	boolean receive(o_package shipment)
+	public boolean store(o_package shipment)
 	{
-		if isFilled()
+		if (isFilled())
 			return false; //return it to the sender!
 			
-		packages.add(shipment);
+		__storage.add(shipment);
+		return true;
 	}
-	
-	boolean 
-	 
-	 
-	 */
 }

@@ -1,37 +1,26 @@
 package application.types;
 
-import java.util.ArrayList;
+import application.storage.storage;
 
-class opening_hours
+public class o_smartpost
 {
-	String t_open;
-	String t_close;
+	public String name;
 	
-	String t_days[];
-}
-
-abstract class __smartpost 
-{
+	public String address;
+	public String zip_code;
+	public String city;
 	
-	public ArrayList<opening_hours> open[];
-	public String address[];
-	public String gps_loc[];
+	public String gps_lat;
+	public String gps_lng;
+	 
+	public storage __storage;
+	//TODO: Methods:
 	
-	public o_storage storage;
-	/*
-
-	*/
-}
-
-public class o_smartpost extends __smartpost
-{
-	/*
-	TODO: Methods:
-	
-	o_smartpost
+	public o_smartpost()
 	{
+		__storage = new storage();
 	}
-	
+	/*
 	void create_package()
 	void get_package()
 	void send_package()
