@@ -6,10 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.smartpost.smartpost;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -34,6 +36,11 @@ public class gui_main implements Initializable{
 	private MenuItem menu_button_settings, menu_button_close;
 	@FXML
 	private WebView screen_web;
+	@FXML
+	private ComboBox<String> cmb_post_offices;
+
+	private smartpost __smartpost;
+	private WebEngine __engine;
 
 	
 	@FXML
@@ -54,6 +61,16 @@ public class gui_main implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	
+	@FXML
+	public void add_post_to_map()
+	{
+		if (cmb_post_offices.getValue().equals(""))
+			return;
+		
+		__smartpost.set_on_map(cmb_post_offices.getSelectionModel().getSelectedIndex(), __engine);
+	}
+	
 	// Event Listener on Button[#button_save].onAction
 	@FXML
 	public void action_save_to_file(ActionEvent event) {
@@ -73,9 +90,13 @@ public class gui_main implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Platform.setImplicitExit(false);
-		final WebEngine __engine = screen_web.getEngine();
-
+		__engine = screen_web.getEngine();
 		__engine.load(getClass().getResource("html/index.html").toExternalForm());
+		
+		__smartpost = smartpost.getInstance();
+		__smartpost.retrieve_all();
+		__smartpost.populate(cmb_post_offices, false);
+		
 	}
 	
 }

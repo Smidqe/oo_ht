@@ -11,12 +11,13 @@ public class handler extends DefaultHandler {
 	public final String[] __values = {"place", "code", "city", "address", "postoffice", "lat", "lng"}; //TODO: Add the corresponding ID:s
 	public boolean[] __bools = {false, false, false, false, false, false, false}; 
 
-	public Integer __count = 0;
-	private smartpost __smartpost;
+	public Integer __count = -1;
+	public smartpost __smartpost;
 	
 	handler()
 	{
 		super();
+		System.out.println("Hello. I am handler");
 		__smartpost = smartpost.getInstance();
 	}
 	
@@ -47,7 +48,6 @@ public class handler extends DefaultHandler {
     		if (__bools[i])
     		{
     			//TODO: Add the necessary checks here!
-   
     			
     			switch(i)
     			{
@@ -60,16 +60,19 @@ public class handler extends DefaultHandler {
     				case 1:
     				{
     					__smartpost.get_locations().get(__count).zip_code = new String(ch, start, length);
+    					break;
     				}
     				
     				case 2:
     				{
     					__smartpost.get_locations().get(__count).city = new String(ch, start, length);
+    					break;
     				}
     				
     				case 3:
     				{
     					__smartpost.get_locations().get(__count).address = new String(ch, start, length);
+    					break;
     				}
     				
     				case 4:

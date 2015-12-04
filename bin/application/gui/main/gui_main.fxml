@@ -21,20 +21,20 @@
                               <WebView fx:id="screen_web" prefHeight="602.0" prefWidth="633.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
+                      <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="300.0" prefHeight="604.0" prefWidth="197.0">
                            <children>
                               <Button fx:id="btn_main_reset" layoutY="576.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="211.0" text="Poista reitit kartalta" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Button fx:id="btn_packages" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Pakettienhallinta" onAction="#gui_shipments_open"/>
+                              <Button fx:id="btn_packages" mnemonicParsing="false" onAction="#gui_shipments_open" prefHeight="50.0" prefWidth="300.0" text="Pakettienhallinta" />
                               <Button fx:id="btn_shipments" layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Lähetykset" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-                              <ComboBox layoutY="170.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0" />
-                              <Button layoutY="197.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Lisää" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="197.0" />
+                              <ComboBox fx:id="cmb_post_offices" layoutY="170.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0" />
+                              <Button layoutY="197.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Lisää" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="197.0" onAction="#add_post_to_map" />
                               <Label layoutY="100.0" prefHeight="70.0" prefWidth="200.0" text="Lisää Smarpost - automaatti" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox layoutY="429.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <ComboBox layoutY="479.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <ChoiceBox layoutY="429.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <ChoiceBox layoutY="479.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Button fx:id="btn_add_route" layoutY="504.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Lisää reitti" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Label layoutY="454.0" prefHeight="27.0" prefWidth="200.0" text="Label" AnchorPane.bottomAnchor="123.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Label layoutY="402.0" prefHeight="27.0" prefWidth="200.0" text="Label" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />

@@ -20,14 +20,37 @@ public class o_smartpost
 	{
 		__storage = new storage();
 	}
-	/*
-	void create_package()
-	void get_package()
-	void send_package()
+	
+	public o_package get_package(int __index)
+	{
+		return null;
+	}
+	
+	public o_package get_package(String __name)
+	{
+		return null;
+	}
+	
+	public boolean send_package(o_package __package, o_smartpost __to)
+	{
+		if (!__to.__storage.isFilled())
+			return false;
+	
+		__to.__storage.store(__package);
+		return true;
+	}
+	
 	void distance(String city, String address, int postal)
-	void get_time(open t);
-	boolean is_open();
+	{
+		
+	}
 	
-	
-	*/
+	@Override
+	public String toString()
+	{
+		StringBuilder __builder = new StringBuilder();
+		
+		__builder.append("Name: " + this.name + ", Address: " + this.address);
+		return __builder.toString();
+	}
 }

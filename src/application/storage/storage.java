@@ -11,15 +11,22 @@ public class storage {
 		
 	//TODO: Methods
 	
+	public storage(int capacity)
+	{
+		__max_amount_packages = capacity;
+		__storage = new ArrayList<o_package>();
+	}
+	
 	public storage()
 	{
 		__max_amount_packages = 100;
 		__storage = new ArrayList<o_package>();
 	}
 	
-	public int contains()
+	public void contains()
 	{
-		return 0;
+		for (int i = 0; i < __storage.size(); i++)
+			System.out.println(__storage.get(i).toString());
 	}
 
 	public float filled()
