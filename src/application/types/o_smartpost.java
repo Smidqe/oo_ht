@@ -15,34 +15,45 @@ public class o_smartpost
 	 
 	public storage __storage;
 	//TODO: Methods:
+
+	public boolean added;
 	
 	public o_smartpost()
 	{
-		__storage = new storage();
+		__storage = storage.getInstance();
 	}
 	
 	public o_package get_package(int __index)
 	{
-		return null;
+		return __storage.__packages.get(__index);
 	}
 	
 	public o_package get_package(String __name)
 	{
-		return null;
+		return get_package(find_package(__name, false));
 	}
-	
-	public boolean send_package(o_package __package, o_smartpost __to)
+
+	public int find_package(String __name, boolean print)
 	{
-		if (!__to.__storage.isFilled())
-			return false;
-	
-		__to.__storage.store(__package);
-		return true;
-	}
-	
-	void distance(String city, String address, int postal)
-	{
+		if (__storage.__packages.isEmpty())
+			return -1;
 		
+		int r = -1;
+		for (int i = 0; i < __storage.__packages.size(); i++)
+		{
+			if (__storage.__packages.get(i).item.name.equals(__name))
+			{
+				r = i;
+				break;
+			}
+		}
+
+		return r;
+	}
+	
+	public boolean find_package(String __name)
+	{
+		return find_package(__name, false) != -1;
 	}
 	
 	@Override

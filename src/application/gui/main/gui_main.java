@@ -24,7 +24,7 @@ import javafx.scene.control.MenuButton;
 
 public class gui_main implements Initializable{
 	@FXML
-	private Button btn_save, btn_load, btn_main_reset, btn_packages, btn_shipments, btn_add_route;
+	private Button btn_save, btn_load, btn_main_reset, btn_packages, btn_items, btn_add_route;
 
 	@FXML
 	private Label label_error;
@@ -63,12 +63,32 @@ public class gui_main implements Initializable{
 	}
 	
 	@FXML
+	public void gui_items_open()
+	{
+		try {
+			Stage stage = new Stage();
+	        Parent root = FXMLLoader.load(getClass().getResource("/application/gui/items/gui_items.fxml"));
+	        
+	        Scene scene = new Scene(root);
+	        
+	        //stage.initStyle(StageStyle.UNDECORATED);
+	        stage.setResizable(false);
+	        stage.setScene(scene);   
+	        stage.show();
+	        
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
 	public void add_post_to_map()
 	{
-		if (cmb_post_offices.getValue().equals(""))
+		if (cmb_post_offices.getValue() == null)
 			return;
-		
+
 		__smartpost.set_on_map(cmb_post_offices.getSelectionModel().getSelectedIndex(), __engine);
+		cmb_post_offices.getSelectionModel().clearSelection();
 	}
 	
 	// Event Listener on Button[#button_save].onAction
@@ -89,7 +109,6 @@ public class gui_main implements Initializable{
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Platform.setImplicitExit(false);
 		__engine = screen_web.getEngine();
 		__engine.load(getClass().getResource("html/index.html").toExternalForm());
 		

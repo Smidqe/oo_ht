@@ -11,15 +11,17 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import application.parser.parser;
+import application.storage.storage;
+import application.types.o_package;
 import application.types.o_smartpost;
 import javafx.scene.control.ComboBox;
 import javafx.scene.web.WebEngine;
-import netscape.javascript.JSObject;
 
 public class smartpost 
 {
 	private static smartpost __smartpost = new smartpost();
 	private ArrayList<o_smartpost> __locations;
+	private storage __storage;
 
 	public static smartpost getInstance() {
 		return __smartpost;
@@ -38,37 +40,32 @@ public class smartpost
 	
 	public void set_on_map(int index, WebEngine __engine)
 	{
+		if (__locations.get(index).added)
+			return;
+		
 		StringBuilder __builder = new StringBuilder();
+		
 		__builder.append("document.goToLocation('");
-		__builder.append(__locations.get(index).address + ", " + __locations.get(index).zip_code + " " + __locations.get(index).city + "'");
-		__builder.append(", '' ,");
-		__builder.append("'red'");
-		__builder.append(")");
-		
-		
-		//String s = "document.goToLocation('" + __locations.get(index).address + "', '" + __locations.get(index).zip_code + " " + __locations.get(index).city + "', 'red'" + ")";
-		System.out.println(__builder.toString());
+		__builder.append(__locations.get(index).address + ", " + __locations.get(index).zip_code + " " + __locations.get(index).city + "'"); //append the address!
+		__builder.append(", '' ,"); //skipping to the next parameter
+		__builder.append("'red'"); //appending the color of the marker
+		__builder.append(")"); //and the ending of the whole string
+
 		__engine.executeScript(__builder.toString());
-		//JSObject __obj = (JSObject)__engine.executeScript("document.goToLocation");
-		//System.out.println("OBJ: " + __obj.toString());
-		
-		
-		//System.out.println("Vals: " + __locations.get(index).zip_code + " " + __locations.get(index).city);
-		//__obj.call("goToLocation()", __locations.get(index).address, __locations.get(index).zip_code + " " + __locations.get(index).city, "red");
+		__locations.get(index).added = true;
 	}
 	
 	public void populate(ComboBox<String> b, boolean force)
 	{
 		if ((b.getItems().size() > 0) && !force)
 			return;
-		
-		System.out.println("Array: " + __locations.toString());
+		else
+			b.getItems().clear();
 		
 		for (int i = 0; i < __locations.size(); i++)
 			b.getItems().add(__locations.get(i).name);
 	
 		//__log.write("Added all the locations to the box_locations");
-		System.out.println("Populated");
 	}
 	
 	public void retrieve_all()
@@ -92,9 +89,47 @@ public class smartpost
 		}
 	}
 	
-	public void clear()
+	private void draw_path(WebEngine __engine, o_smartpost __from, o_smartpost __to, int __class)
 	{
+		if (!(__from.added && __to.added))
+			return;
 		
+		StringBuilder __builder = new StringBuilder();
+		
+		__builder.append("document.createPath('");
+		
+		__builder.append("[" + __from.gps_lat + ", ");
+		__builder.append(__from.gps_lng + ", ");
+		
+		__builder.append(__to.gps_lat + "', '");
+		__builder.append(__to.gps_lng + "], '");
+		
+		__builder.append("red', ");
+		__builder.append(__class);
+		
+		__builder.append(")"); //and the ending of the whole string
+		
+		System.out.println(__builder.toString());
+		
+		__engine.executeScript(__builder.toString());
+	}
+	
+	public boolean send_package(WebEngine __engine, int __index, o_smartpost __from, o_smartpost __to)
+	{
+		__storage = storage.getInstance();
+		if (!__storage.isFilled() || __storage.__packages.size() == 0)
+			return false;
+		
+		o_package __package = __storage.take(__index);
+		draw_path(__engine, __from, __to, __package.__class);
+		
+		//__storage.store(__package);
+		return true;
+	}
+	
+	public void clear(WebEngine __engine)
+	{
+		__engine.executeScript("document.deletePaths()");
 	}
 }		
 

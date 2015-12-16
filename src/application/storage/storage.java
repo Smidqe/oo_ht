@@ -5,33 +5,39 @@ import java.util.ArrayList;
 import application.types.o_package;
 
 public class storage {
-	public int __max_amount_packages;
-	public ArrayList<o_package> __storage;
-		
+	private static int __max_amount_packages;
+	public ArrayList<o_package> __packages;
+	private static storage __storage = new storage();
+	
 		
 	//TODO: Methods
 	
-	public storage(int capacity)
+	public static storage getInstance()
 	{
-		__max_amount_packages = capacity;
-		__storage = new ArrayList<o_package>();
+		return __storage; 
 	}
 	
-	public storage()
+	private storage(int capacity)
+	{
+		__max_amount_packages = capacity;
+		__packages = new ArrayList<o_package>();
+	}
+	
+	private storage()
 	{
 		__max_amount_packages = 100;
-		__storage = new ArrayList<o_package>();
+		__packages = new ArrayList<o_package>();
 	}
 	
 	public void contains()
 	{
-		for (int i = 0; i < __storage.size(); i++)
-			System.out.println(__storage.get(i).toString());
+		for (int i = 0; i < __packages.size(); i++)
+			System.out.println(__packages.get(i).toString());
 	}
 
 	public float filled()
 	{
-		return (__storage.size() / __max_amount_packages);
+		return (__packages.size() / __max_amount_packages);
 	}
 	
 	public boolean filled(int min)
@@ -46,10 +52,10 @@ public class storage {
 	
 	public o_package take(int i)
 	{
-		if (__storage.size() == 0)
+		if (__packages.size() == 0)
 			return null;
 	
-		return __storage.remove(i);
+		return __packages.remove(i);
 	}
 	
 	public boolean store(o_package shipment)
@@ -57,7 +63,7 @@ public class storage {
 		if (isFilled())
 			return false; //return it to the sender!
 			
-		__storage.add(shipment);
+		__packages.add(shipment);
 		return true;
 	}
 }

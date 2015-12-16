@@ -1,24 +1,28 @@
 package application.files;
 
-
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
-
-
-class __file extends File
+public class files extends File
 {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+
 	String path;
 	String name;
 	
 	boolean open;
 	boolean binary;
+	boolean __exists;
+	boolean __in_use;
 	
-	__file(String path, String name)
+	files(String path, String name)
 	{
 		super(path + name);
 		
@@ -26,87 +30,56 @@ class __file extends File
 		this.name = name;
 	}
 	
+	public files(String path) {
+		
+		super(path);
+		
+		this.path = path;
+		this.name = "";
+		// TODO Auto-generated constructor stub
+	}
+
 	public boolean exists()
 	{
-		return this.exists() && this.isFile();
+		return __exists = super.exists() && isFile();
 	}
 	
-	public boolean write()
+	public boolean write(String __text, boolean append) throws IOException
 	{
-		return false;
-	}
-	
-	public boolean read()
-	{
-		return false;
-	}
-}
-
-public class files {
-	
-	ArrayList<__file> __files = new ArrayList<__file>();
-	
-	public String get_name(String path)
-	{
-		if (!exists(path))
-			return "";
+		if (!canWrite())
+			return false;
 		
-		return new File(path).getName();
-	}
-	
-	public void open(String path)
-	{
-		if (is_open(get_name(path)))
-			__files.add(new __file(path, get_name(path)));
-		
-	}
-	
-	public boolean is_open(String path)
-	{
-		int i;
-		for (i = 0; i < __files.size(); i++)
+		if (!append && exists())
 		{
-			if (exists(__files.get(i).path))
-				return true;
-			
-			//
+			 delete();
+			 createNewFile();
 		}
 		
-		return false;
-	}
-	
-	public boolean close()
-	{
+		OutputStreamWriter r = null;
+		try {
+			r = new OutputStreamWriter(new FileOutputStream(path, append), "UTF-8");
+			r.write(__text);
+			r.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+		return true;
+	}
+	
+	public ArrayList<String> read() throws IOException
+	{
+		BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
 		
-		return false;
+		ArrayList<String> txt = new ArrayList<String>();
+		String __tmp;
+		
+		while ((__tmp = r.readLine()) != null)
+			txt.add(__tmp);
+		
+		r.close();
+		return txt;
 	}
-	
-	public ArrayList<String> read()
-	{
-		return null;
-	}
-	
-	public boolean write(String path, int t)
-	{
-		return false;
-	}
-	
-	public boolean exists(String path)
-	{
-		File f = new File(path);
-	
-		return f.exists() && f.isFile();
-	}
-	
-	public boolean create(String path, String name, boolean binary)
-	{
 
-		return false;
-	}
-	
-	public int size()
-	{
-		return -1;
-	}
 }

@@ -21,13 +21,7 @@ public class parser {
 	
 	public void parse(InputSource filename) throws ParserConfigurationException, SAXException, IOException
 	{
-		/*
-		if (!xml_exists(filename))
-		{
-			System.out.println("XML not found");
-			return;
-		}
-		*/
+
         SAXParserFactory factory = SAXParserFactory.newInstance();
         try {
             SAXParser __parser = factory.newSAXParser();
@@ -38,25 +32,9 @@ public class parser {
         } catch (ParserConfigurationException e) {
             System.out.println("ParserConfig error");
         } catch (SAXException e) {
-            System.out.println("SAXException : xml not well formed");
+            System.out.println("SAXException : Invalid XML");
         } catch (IOException e) {
             System.out.println("IO error");
         }
-	}
-	
-	public boolean xml_exists(InputSource __source) throws IOException
-	{
-		
-		if (__source.toString().contains("http"))
-		{
-			URL url = new URL(__source.toString());
-			HttpURLConnection __site = (HttpURLConnection) url.openConnection();
-			__site.setRequestMethod("GET");
-			
-			return (__site.getResponseCode() == HttpURLConnection.HTTP_OK);
-		}
-
-		files __file = new files();
-		return __file.exists(__source.toString());
 	}
 }

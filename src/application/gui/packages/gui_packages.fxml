@@ -8,20 +8,22 @@
    <children>
       <SplitPane dividerPositions="0.6705685618729097" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <ChoiceBox layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="194.0" />
-                  <ChoiceBox layoutX="14.0" layoutY="104.0" prefHeight="25.0" prefWidth="194.0" />
-                  <ChoiceBox layoutX="14.0" layoutY="359.0" prefHeight="25.0" prefWidth="194.0" />
-                  <ChoiceBox layoutX="14.0" layoutY="307.0" prefHeight="25.0" prefWidth="194.0" />
                   <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="194.0" text="Valitse esine:" />
+                  <ComboBox fx:id="cmb_item" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="300.0" />
+                  <ComboBox fx:id="cmb_from" layoutX="14.0" layoutY="303.0" prefHeight="25.0" prefWidth="300.0" />
+                  <Label layoutX="14.0" layoutY="278.0" prefHeight="25.0" prefWidth="300.0" text="Lähtöpaikka" />
+                  <ComboBox fx:id="cmb_to" layoutX="14.0" layoutY="359.0" prefHeight="25.0" prefWidth="300.0" />
+                  <Label layoutX="14.0" layoutY="334.0" prefHeight="25.0" prefWidth="300.0" text="Saapumispaikka" />
+                  <ComboBox fx:id="cmb_class" layoutX="317.0" layoutY="39.0" prefHeight="25.0" prefWidth="66.0" />
+                  <Label layoutX="317.0" layoutY="14.0" prefHeight="25.0" prefWidth="66.0" text="Luokka" />
                </children>
             </AnchorPane>
           <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
                   <Button fx:id="btn_info" layoutY="2.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Pakettiluokat - Info" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button fx:id="btn_create" layoutY="348.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Luo paketti" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                  <Button fx:id="btn_create_item" layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Luo uusi esine" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0"  onAction="#gui_items_open"/>
+                  <Button fx:id="btn_create" layoutY="348.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Luo paketti" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <Button fx:id="btn_cancel" layoutY="298.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Peruuta" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
