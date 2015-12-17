@@ -4,6 +4,8 @@ public class o_package
 {
 	o_item item;
 	
+	public String name;
+	
 	public o_smartpost __from;
 	public o_smartpost __to;
 
@@ -27,28 +29,25 @@ public class o_package
 		this.max_weight = (1 * 2 * c);
 		this.safety_rating = (float) (0.33 * c);
 		this.max_speed = (float) (80.0 - (20 *  c));
-		this.max_distance = 150 + (25 * c);
+		this.max_distance = 150 + (400 * c);
 	}
 
-	o_package(o_item __item, o_smartpost f, o_smartpost t, int c)
+	public o_package(o_item __item, o_smartpost f, o_smartpost t, int c)
 	{
+		this.name = "Package: " + __item.name + ", Class: " + c;
 		this.item = __item;
 		this.__from = f;
 		this.__to = t;
 		this.__class = c;
+		this.breakable = __item.breakable;
 		
+		for (int i = 0; i < 3; i++)
+			max_size[i] = max_size[i] * c;
 		
-		/*
-		if distance(f, t) > class_max_dist(c)
-			return null;
-		 
-		
-		if !item_fits(c) 
-			return null;
-		 
-		 
-		if  
-		 */
+		this.max_weight = (1 * 2 * c);
+		this.safety_rating = (float) (0.33 * c);
+		this.max_speed = (float) (80.0 - (20 *  c));
+		this.max_distance = 150 + (400 * (c - 1));
 		
 		set_values(__class);
 	}

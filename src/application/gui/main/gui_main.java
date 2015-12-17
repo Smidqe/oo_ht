@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 import application.files.log;
 import application.smartpost.smartpost;
+import application.storage.storage;
 import application.types.o_package;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -44,7 +45,7 @@ public class gui_main implements Initializable{
 	private smartpost __smartpost;
 	private WebEngine __engine;
 	private log __log;
-
+	private storage __storage;
 	
 	@FXML
 	public void gui_shipments_open()
@@ -95,6 +96,12 @@ public class gui_main implements Initializable{
 	}
 	
 	@FXML
+	public void clear()
+	{
+		__smartpost.clear(__engine);
+	}
+	
+	@FXML
 	public void action_send(ActionEvent e)
 	{
 		o_package __package = __smartpost.send_package(__engine, cmb_packages.getItems().indexOf(cmb_packages.getValue()));
@@ -104,9 +111,13 @@ public class gui_main implements Initializable{
 		
 		double dist = __smartpost.draw_path(__engine, __package);
 		
-		__log.add_entry(dist, __package, true);
+		//__log.add_entry(dist, __package, true);
 	}
-	
+	@FXML
+	public void load()
+	{
+		__storage.populate(cmb_packages, true);
+	}
 	// Event Listener on Button[#button_save].onAction
 	@FXML
 	public void action_save_to_file(ActionEvent event) {
@@ -131,6 +142,8 @@ public class gui_main implements Initializable{
 		__smartpost = smartpost.getInstance();
 		__smartpost.retrieve_all();
 		__smartpost.populate(cmb_post_offices, false);
+		
+		__storage = storage.getInstance();
 
 	}
 	

@@ -125,4 +125,20 @@ public class items {
 	public ArrayList<o_item> list() {
 		return __items;
 	}
+
+
+	public o_item find(String __name) {
+		if (list().size() <= 0)
+			return null;
+		
+		for (int i = 0; i < list().size(); i++)
+		{
+			if (list().get(i).name.trim().equals(__name.trim()))
+				return list().get(i);
+		}
+		
+		System.out.println("No result");
+		
+		return null;
+	}
 }

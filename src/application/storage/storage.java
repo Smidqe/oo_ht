@@ -3,6 +3,7 @@ package application.storage;
 import java.util.ArrayList;
 
 import application.types.o_package;
+import javafx.scene.control.ComboBox;
 
 public class storage {
 	private static int __max_amount_packages;
@@ -65,5 +66,11 @@ public class storage {
 			
 		__packages.add(shipment);
 		return true;
+	}
+
+	public void populate(ComboBox<String> cmb, boolean force) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < __packages.size(); i++)
+			cmb.getItems().add(__packages.get(i).name);
 	}
 }

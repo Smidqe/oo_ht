@@ -90,20 +90,23 @@ public class smartpost
 	
 	public double draw_path(WebEngine __engine, o_package pack)
 	{
-		if (!(pack.__from.added && pack.__to.added))
-			return 0;
+		if (!(pack.__from.added))
+			set_on_map(find(pack.__from.name, false), __engine);
+		
+		if (!(pack.__to.added))
+			set_on_map(find(pack.__to.name, false), __engine);
 		
 		StringBuilder __builder = new StringBuilder();
 		
-		__builder.append("document.createPath('");
+		__builder.append("document.createPath(");
 		
 		__builder.append("[" + pack.__from.gps_lat + ", ");
 		__builder.append(pack.__from.gps_lng + ", ");
 		
-		__builder.append(pack.__to.gps_lat + "', '");
-		__builder.append(pack.__to.gps_lng + "], '");
+		__builder.append(pack.__to.gps_lat + ", ");
+		__builder.append(pack.__to.gps_lng + "], ");
 		
-		__builder.append("red', ");
+		__builder.append("'red', ");
 		__builder.append(pack.__class);
 		
 		__builder.append(")"); //and the ending of the whole string
@@ -126,6 +129,32 @@ public class smartpost
 	public void clear(WebEngine __engine)
 	{
 		__engine.executeScript("document.deletePaths()");
+	}
+
+	public o_smartpost find(String __name) {
+		if (__locations.size() <= 0)
+			return null;
+		
+		for (int i = 0; i < __locations.size(); i++)
+		{
+			if (__locations.get(i).name.equals(__name))
+				return __locations.get(i);
+		}
+		
+		return null;
+	}
+
+	public int find(String __name, boolean debug) {
+		if (__locations.size() <= 0)
+			return -1;
+		
+		for (int i = 0; i < __locations.size(); i++)
+		{
+			if (__locations.get(i).name.equals(__name))
+				return i;
+		}
+		
+		return -1;
 	}
 }		
 
