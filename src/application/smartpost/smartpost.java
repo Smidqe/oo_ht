@@ -30,7 +30,6 @@ public class smartpost
 	private smartpost()
 	{
 		__locations = new ArrayList<o_smartpost>();
-		
 	}
 	
 	public ArrayList<o_smartpost> get_locations()
@@ -89,42 +88,39 @@ public class smartpost
 		}
 	}
 	
-	private void draw_path(WebEngine __engine, o_smartpost __from, o_smartpost __to, int __class)
+	public double draw_path(WebEngine __engine, o_package pack)
 	{
-		if (!(__from.added && __to.added))
-			return;
+		if (!(pack.__from.added && pack.__to.added))
+			return 0;
 		
 		StringBuilder __builder = new StringBuilder();
 		
 		__builder.append("document.createPath('");
 		
-		__builder.append("[" + __from.gps_lat + ", ");
-		__builder.append(__from.gps_lng + ", ");
+		__builder.append("[" + pack.__from.gps_lat + ", ");
+		__builder.append(pack.__from.gps_lng + ", ");
 		
-		__builder.append(__to.gps_lat + "', '");
-		__builder.append(__to.gps_lng + "], '");
+		__builder.append(pack.__to.gps_lat + "', '");
+		__builder.append(pack.__to.gps_lng + "], '");
 		
 		__builder.append("red', ");
-		__builder.append(__class);
+		__builder.append(pack.__class);
 		
 		__builder.append(")"); //and the ending of the whole string
 		
 		System.out.println(__builder.toString());
 		
-		__engine.executeScript(__builder.toString());
+		return (double) __engine.executeScript(__builder.toString());
 	}
 	
-	public boolean send_package(WebEngine __engine, int __index, o_smartpost __from, o_smartpost __to)
+	public o_package send_package(WebEngine __engine, int __index)
 	{
 		__storage = storage.getInstance();
-		if (!__storage.isFilled() || __storage.__packages.size() == 0)
-			return false;
 		
-		o_package __package = __storage.take(__index);
-		draw_path(__engine, __from, __to, __package.__class);
-		
-		//__storage.store(__package);
-		return true;
+		if (__storage.__packages.size() == 0 || __index > __storage.__packages.size())
+			return null;
+		else
+			return __storage.take(__index);
 	}
 	
 	public void clear(WebEngine __engine)

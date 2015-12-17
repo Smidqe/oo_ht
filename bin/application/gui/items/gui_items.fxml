@@ -25,10 +25,11 @@
             </AnchorPane>
           <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Button fx:id="btn_create_item" disable="true" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Luo esine" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button fx:id="btn_create" disable="false" mnemonicParsing="false" onAction="#save" prefHeight="50.0" prefWidth="200.0" text="Luo esine" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Button layoutY="348.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Peruuta" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <Label fx:id="lbl_items_information" layoutY="50.0" prefHeight="299.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="50.0" />
-                  <Button layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Päivitä" />
+                  <Label fx:id="lbl_information" layoutY="50.0" prefHeight="299.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="50.0" />
+                  <Button fx:id="btn_update" layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Päivitä" onAction="#save"/>
+                  <Button fx:id="btn_remove" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Poista" onAction="#remove"/>
                </children>
             </AnchorPane>
         </items>

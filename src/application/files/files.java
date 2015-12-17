@@ -81,5 +81,4 @@ public class files extends File
 		r.close();
 		return txt;
 	}
-
 }

@@ -1,10 +1,12 @@
 package application.types;
 
+import java.util.Arrays;
+
 public class o_item
 {
 	public String name;
 	
-	public int weight;
+	public float weight;
 	public int size[] = new int[3];
 	
 	public float durability; //0 extremely fragile, 1 never breaks;
@@ -26,6 +28,12 @@ public class o_item
 		this.breakable = breakable;
 	}
 	
+	@Override
+	public String toString() {
+		return name + ", " + weight + ", " + Arrays.toString(size) + ", "
+				+ durability + ", " + breakable;
+	}
+
 	public float get_volume()
 	{
 		return size[0] * size[1] * size[2];
