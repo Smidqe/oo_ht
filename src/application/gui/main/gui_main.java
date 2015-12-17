@@ -23,7 +23,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -101,6 +100,7 @@ public class gui_main implements Initializable{
 			return;
 
 		__smartpost.set_on_map(cmb_post_offices.getSelectionModel().getSelectedIndex(), __engine);
+		__log.entry("Automaatti: " + cmb_post_offices.getValue() + " lisätty kartalle.", true);
 		cmb_post_offices.getSelectionModel().clearSelection();
 	}
 	
@@ -119,8 +119,7 @@ public class gui_main implements Initializable{
 			return;
 		
 		double dist = __smartpost.draw_path(__engine, __package);
-		
-		//__log.add_entry(dist, __package, true);
+		__log.entry(dist, __package, true, "Paketti lähetetty, matkan pituus: ");
 	}
 	@FXML
 	public void load()
@@ -162,7 +161,7 @@ public class gui_main implements Initializable{
 		__log = log.getInstance();
 		__log.set_view(tbl_log);
 		
-		__log.entry("Something has happened", true);
+		__log.entry("Kaikki tarvittava tieto ladattu.", true);
 	}
 	
 }

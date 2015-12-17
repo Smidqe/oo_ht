@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import application.files.log;
 import application.parser.parser;
 import application.storage.storage;
 import application.types.o_package;
@@ -45,7 +46,7 @@ public class smartpost
 		StringBuilder __builder = new StringBuilder();
 		
 		__builder.append("document.goToLocation('");
-		__builder.append(__locations.get(index).address + ", " + __locations.get(index).zip_code + " " + __locations.get(index).city + "'"); //append the address!
+		__builder.append(__locations.get(index).getAddress() + ", " + __locations.get(index).getZip_code() + " " + __locations.get(index).getCity() + "'"); //append the address!
 		__builder.append(", '' ,"); //skipping to the next parameter
 		__builder.append("'red'"); //appending the color of the marker
 		__builder.append(")"); //and the ending of the whole string
@@ -62,9 +63,9 @@ public class smartpost
 			b.getItems().clear();
 		
 		for (int i = 0; i < __locations.size(); i++)
-			b.getItems().add(__locations.get(i).name);
+			b.getItems().add(__locations.get(i).getName());
 	
-		//__log.write("Added all the locations to the box_locations");
+		log.getInstance().entry("Paikkatiedot ladattu", true);
 	}
 	
 	public void retrieve_all()
@@ -86,33 +87,34 @@ public class smartpost
 			System.out.println("Something happened");
 			e.printStackTrace();
 		}
+        
+        log.getInstance().entry("Automaattien tiedot parsittu ja lisätty.", true);
 	}
 	
 	public double draw_path(WebEngine __engine, o_package pack)
 	{
-		if (!(pack.__from.added))
-			set_on_map(find(pack.__from.name, false), __engine);
+		if (!(pack.get_from().added))
+			set_on_map(find(pack.get_from().getName(), false), __engine);
 		
-		if (!(pack.__to.added))
-			set_on_map(find(pack.__to.name, false), __engine);
+		if (!(pack.get_to().added))
+			set_on_map(find(pack.get_to().getName(), false), __engine);
 		
 		StringBuilder __builder = new StringBuilder();
 		
 		__builder.append("document.createPath(");
 		
-		__builder.append("[" + pack.__from.gps_lat + ", ");
-		__builder.append(pack.__from.gps_lng + ", ");
+		__builder.append("[" + pack.get_from().getGps_lat() + ", ");
+		__builder.append(pack.get_from().getGps_lng() + ", ");
 		
-		__builder.append(pack.__to.gps_lat + ", ");
-		__builder.append(pack.__to.gps_lng + "], ");
+		__builder.append(pack.get_to().getGps_lat() + ", ");
+		__builder.append(pack.get_to().getGps_lng() + "], ");
 		
 		__builder.append("'red', ");
-		__builder.append(pack.__class);
+		__builder.append(pack.get_class());
 		
 		__builder.append(")"); //and the ending of the whole string
 		
-		System.out.println(__builder.toString());
-		
+		log.getInstance().entry("Piirretään reitti: " + pack.get_from().getName() + " - " + pack.get_to().getName(), true);
 		return (double) __engine.executeScript(__builder.toString());
 	}
 	
@@ -129,6 +131,7 @@ public class smartpost
 	public void clear(WebEngine __engine)
 	{
 		__engine.executeScript("document.deletePaths()");
+		log.getInstance().entry("Kaikki piirretyt reitit pyyhitty.", true);
 	}
 
 	public o_smartpost find(String __name) {
@@ -137,7 +140,7 @@ public class smartpost
 		
 		for (int i = 0; i < __locations.size(); i++)
 		{
-			if (__locations.get(i).name.equals(__name))
+			if (__locations.get(i).getName().equals(__name))
 				return __locations.get(i);
 		}
 		
@@ -150,7 +153,7 @@ public class smartpost
 		
 		for (int i = 0; i < __locations.size(); i++)
 		{
-			if (__locations.get(i).name.equals(__name))
+			if (__locations.get(i).getName().equals(__name))
 				return i;
 		}
 		

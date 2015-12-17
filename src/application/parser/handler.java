@@ -8,7 +8,7 @@ import application.types.o_smartpost;
 import application.smartpost.*;
 
 public class handler extends DefaultHandler {
-	public final String[] __values = {"place", "code", "city", "address", "postoffice", "lat", "lng"}; //TODO: Add the corresponding ID:s
+	public final String[] __values = {"place", "code", "city", "address", "postoffice", "lat", "lng"};
 	public boolean[] __bools = {false, false, false, false, false, false, false}; 
 
 	public Integer __count = -1;
@@ -17,7 +17,6 @@ public class handler extends DefaultHandler {
 	handler()
 	{
 		super();
-		System.out.println("Hello. I am handler");
 		__smartpost = smartpost.getInstance();
 	}
 	
@@ -59,35 +58,35 @@ public class handler extends DefaultHandler {
     				}
     				case 1:
     				{
-    					__smartpost.get_locations().get(__count).zip_code = new String(ch, start, length);
+    					__smartpost.get_locations().get(__count).setZip_code(new String(ch, start, length));
     					break;
     				}
     				
     				case 2:
     				{
-    					__smartpost.get_locations().get(__count).city = new String(ch, start, length);
+    					__smartpost.get_locations().get(__count).setCity(new String(ch, start, length));
     					break;
     				}
     				
     				case 3:
     				{
-    					__smartpost.get_locations().get(__count).address = new String(ch, start, length);
+    					__smartpost.get_locations().get(__count).setAddress(new String(ch, start, length));
     					break;
     				}
     				
     				case 4:
     				{
-    					__smartpost.get_locations().get(__count).name = new String(ch, start, length);
+    					__smartpost.get_locations().get(__count).setName(new String(ch, start, length));
     					break;
     				}
     				case 5:
     				{
-    					__smartpost.get_locations().get(__count).gps_lat = new String(ch, start, length);
+    					__smartpost.get_locations().get(__count).setGps_lat(new String(ch, start, length));
     					break;
     				}
     				case 6:
     				{
-    					__smartpost.get_locations().get(__count).gps_lng = new String(ch, start, length);
+    					__smartpost.get_locations().get(__count).setGps_lng(new String(ch, start, length));
     					break;
     				}
     			}

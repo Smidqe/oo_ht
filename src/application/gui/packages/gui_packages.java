@@ -33,7 +33,7 @@ public class gui_packages implements Initializable{
 	{
 		if (!filled())
 			return;
-		
+
 		__storage.store(new o_package(__items.find(cmb_item.getValue()), __locations.find(cmb_from.getValue()), __locations.find(cmb_to.getValue()), Integer.parseInt(cmb_class.getValue())));
 	}
 	

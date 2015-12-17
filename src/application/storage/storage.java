@@ -1,7 +1,9 @@
 package application.storage;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import application.files.log;
 import application.types.o_package;
 import javafx.scene.control.ComboBox;
 
@@ -61,13 +63,17 @@ public class storage {
 		if (isFilled())
 			return false; //return it to the sender!
 			
-		__packages.add(shipment);
+		Random __rand = new Random();
+		if (shipment.getSafety_rating() > __rand.nextFloat())
+			__packages.add(shipment);
+		else
+			log.getInstance().entry("Valitettavasti paketti hajosi matkan aikana.", true);
+		
 		return true;
 	}
 
 	public void populate(ComboBox<String> cmb, boolean force) {
-		// TODO Auto-generated method stub
 		for (int i = 0; i < __packages.size(); i++)
-			cmb.getItems().add(__packages.get(i).name);
+			cmb.getItems().add(__packages.get(i).getName());
 	}
 }

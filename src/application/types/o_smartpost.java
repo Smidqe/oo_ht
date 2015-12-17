@@ -4,16 +4,16 @@ import application.storage.storage;
 
 public class o_smartpost
 {
-	public String name;
+	private String name;
 	
-	public String address;
-	public String zip_code;
-	public String city;
+	private String address;
+	private String zip_code;
+	private String city;
 	
-	public String gps_lat;
-	public String gps_lng;
+	private String gps_lat;
+	private String gps_lng;
 	 
-	public storage __storage;
+	private storage __storage;
 	//TODO: Methods:
 
 	public boolean added;
@@ -40,13 +40,11 @@ public class o_smartpost
 		
 		int r = -1;
 		for (int i = 0; i < __storage.__packages.size(); i++)
-		{
-			if (__storage.__packages.get(i).item.name.equals(__name))
+			if (__storage.__packages.get(i).getItem().name.equals(__name))
 			{
 				r = i;
 				break;
 			}
-		}
 
 		return r;
 	}
@@ -63,5 +61,71 @@ public class o_smartpost
 		
 		__builder.append("Name: " + this.name + ", Address: " + this.address);
 		return __builder.toString();
+	}
+
+	//Getters and setters, all created automatically by Eclipse.
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getZip_code() {
+		return zip_code;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getGps_lat() {
+		return gps_lat;
+	}
+
+	public String getGps_lng() {
+		return gps_lng;
+	}
+
+	public storage get__storage() {
+		return __storage;
+	}
+
+	public boolean isAdded() {
+		return added;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setZip_code(String zip_code) {
+		this.zip_code = zip_code;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setGps_lat(String gps_lat) {
+		this.gps_lat = gps_lat;
+	}
+
+	public void setGps_lng(String gps_lng) {
+		this.gps_lng = gps_lng;
+	}
+
+	public void set_storage(storage __storage) {
+		this.__storage = __storage;
+	}
+
+	public void setAdded(boolean added) {
+		this.added = added;
 	}
 }

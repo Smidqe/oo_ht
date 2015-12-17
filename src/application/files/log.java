@@ -4,7 +4,6 @@ import application.types.o_package;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -56,12 +55,8 @@ public class log {
 		
 		return false;
 	}	
-	
-	//void load_by(timetype t)
-	//void sort(sort_by s);
-	//void clear() 
 
-	public void write(double dist, o_package __package) {
+	private void write(double dist, o_package __package) {
 		if (!__files.exists())
 			return;
 		
@@ -88,13 +83,13 @@ public class log {
 	
 	public void to_table(String __from, String __to, String __message)
 	{
-		 __entries.add(new o_log_struct(getTime(false) + ", " + getTime(true), __message, __from, __to));
+		 __entries.add(new o_log_struct(getTime(true) + ", " + getTime(false), __message, __from, __to));
 		 __view.setItems(__entries);
 	}
 	
 	public void entry(double dist, o_package __package, boolean to_file, String __message) {
 		//decide what to do.
-		to_table(__package.__from.name, __package.__to.name, __message);
+		to_table(__package.get_from().getName(), __package.get_to().getName(), __message + dist);
 		
 		if (to_file)
 			write(dist, __package);
@@ -113,7 +108,7 @@ public class log {
 			return;
 		
 		try {
-			__files.write(getTime(false) + ", " + getTime(true) + ": " + __txt + '\n', true); //TODO: Finish this.
+			__files.write(getTime(true) + ", " + getTime(false) + ": " + __txt + '\n', true); //TODO: Finish this.
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
