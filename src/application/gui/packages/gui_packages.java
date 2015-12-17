@@ -37,12 +37,6 @@ public class gui_packages implements Initializable{
 		__storage.store(new o_package(__items.find(cmb_item.getValue()), __locations.find(cmb_from.getValue()), __locations.find(cmb_to.getValue()), Integer.parseInt(cmb_class.getValue())));
 	}
 	
-	@FXML
-	private void refresh()
-	{
-		
-	}
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{

@@ -12,7 +12,7 @@
    <children>
       <TabPane id="tab_main" layoutY="-212.0" prefHeight="612.0" prefWidth="600.0" style="-fx-background-insets: 0; -fx-padding: -5,; -fx-pref-height: 2;" styleClass="tab_css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Map">
+          <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Kartta">
                <content>
                   <SplitPane dividerPositions="0.6435294117647059" prefHeight="160.0" prefWidth="200.0">
                     <items>
@@ -23,7 +23,7 @@
                         </AnchorPane>
                       <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="300.0" prefHeight="604.0" prefWidth="197.0">
                            <children>
-                              <Button fx:id="btn_main_reset" layoutY="576.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="211.0" text="Poista reitit kartalta" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" onAction="#clear"/>
+                              <Button fx:id="btn_main_reset" layoutY="576.0" mnemonicParsing="false" onAction="#clear" prefHeight="50.0" prefWidth="211.0" text="Poista reitit kartalta" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Button fx:id="btn_packages" mnemonicParsing="false" onAction="#gui_shipments_open" prefHeight="50.0" prefWidth="300.0" text="Pakettienhallinta" />
                               <Button fx:id="btn_items" layoutY="50.0" mnemonicParsing="false" onAction="#gui_items_open" prefHeight="50.0" prefWidth="200.0" text="Esineidenhallinta" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
                               <ComboBox fx:id="cmb_post_offices" layoutY="170.0" prefHeight="27.0" prefWidth="200.0" promptText="Valitse lisättävä posti" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0" />
@@ -37,27 +37,27 @@
                                  </font>
                               </Label>
                               <ComboBox fx:id="cmb_packages" layoutY="395.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="184.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Button fx:id="btn_send" layoutY="420.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Lähetä paketti" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" onAction="#action_send"/>
+                              <Button fx:id="btn_send" layoutY="420.0" mnemonicParsing="false" onAction="#action_send" prefHeight="50.0" prefWidth="200.0" text="Lähetä paketti" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Label layoutY="368.0" prefHeight="27.0" prefWidth="200.0" text="Valitse paketti" AnchorPane.bottomAnchor="209.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Button fx:id="btn_load" layoutY="470.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" text="Lataa paketit" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" onAction="#load"/>
+                              <Button fx:id="btn_load" layoutY="470.0" mnemonicParsing="false" onAction="#load" prefHeight="50.0" prefWidth="300.0" text="Lataa paketit" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
                </content>
           </Tab>
-          <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Log">
+          <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Lokitiedot">
                <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="btn_save" layoutY="379.0" mnemonicParsing="false" onAction="#action_save_to_file" prefHeight="40.0" prefWidth="90.0" text="Tallenna" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
                         <Button fx:id="btn_load" layoutX="75.0" layoutY="379.0" mnemonicParsing="false" onAction="#action_load_from_file" prefHeight="40.0" prefWidth="90.0" text="Lataa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="90.0" />
                         <Label fx:id="label_error" layoutX="158.0" layoutY="563.0" prefHeight="40.0" prefWidth="692.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <TableView prefHeight="564.0" prefWidth="850.0">
+                        <TableView fx:id="tbl_log" prefHeight="564.0" prefWidth="850.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                              <TableColumn prefWidth="75.0" text="Column X" />
-                              <TableColumn editable="false" prefWidth="247.0" text="Column X" />
+                            <TableColumn fx:id="tb_time" prefWidth="176.0" text="Ajankohta" />
+                            <TableColumn fx:id="tb_from" minWidth="0.0" prefWidth="145.0" text="Lähtöpaikka" />
+                              <TableColumn fx:id="tb_to" minWidth="0.0" prefWidth="148.0" text="Saapumispaikka" />
+                              <TableColumn fx:id="tb_text" editable="false" prefWidth="380.0" text="Paketti/Viesti" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>

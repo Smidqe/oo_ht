@@ -14,12 +14,16 @@ import java.util.ResourceBundle;
 import application.files.log;
 import application.smartpost.smartpost;
 import application.storage.storage;
+import application.types.o_log_struct;
 import application.types.o_package;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -42,6 +46,11 @@ public class gui_main implements Initializable{
 	@FXML
 	private ComboBox<String> cmb_post_offices, cmb_packages;
 
+	@FXML
+	private TableView<o_log_struct> tbl_log;
+	@FXML
+	private TableColumn<o_log_struct, String> tb_time, tb_from, tb_to, tb_text;
+	
 	private smartpost __smartpost;
 	private WebEngine __engine;
 	private log __log;
@@ -144,7 +153,16 @@ public class gui_main implements Initializable{
 		__smartpost.populate(cmb_post_offices, false);
 		
 		__storage = storage.getInstance();
-
+		
+        tb_time.setCellValueFactory(cellData -> cellData.getValue().timeProperty());
+        tb_from.setCellValueFactory(cellData -> cellData.getValue().fromProperty());
+        tb_to.setCellValueFactory(cellData -> cellData.getValue().toProperty());
+        tb_text.setCellValueFactory(cellData -> cellData.getValue().textProperty());
+		
+		__log = log.getInstance();
+		__log.set_view(tbl_log);
+		
+		__log.entry("Something has happened", true);
 	}
 	
 }

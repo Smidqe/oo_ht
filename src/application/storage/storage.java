@@ -10,9 +10,6 @@ public class storage {
 	public ArrayList<o_package> __packages;
 	private static storage __storage = new storage();
 	
-		
-	//TODO: Methods
-	
 	public static storage getInstance()
 	{
 		return __storage; 

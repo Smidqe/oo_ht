@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-
+import application.files.log;
 import application.items.*;
 import application.types.o_item;
 
@@ -36,6 +36,7 @@ public class gui_items implements Initializable{
 	private Button btn_create, btn_remove, btn_update;
 	
 	private items __info;
+	private log __log;
 	
 	
 	@FXML
@@ -99,9 +100,10 @@ public class gui_items implements Initializable{
 			for (int i = 0 ; i < f.size.length; i++)
 				f.size[i] = Integer.parseInt(__t[i].trim());
 
-			System.out.println(f.toString());
 			if (!e.getTarget().toString().equals("Button[id=btn_update, styleClass=button]'Päivitä'"))
 				__info.create(f);
+		
+			__log.entry("ITEMS: Added a new item: " + f.toString(), true);
 			
 			__info.populate(cmb_items, true);
 			try {
@@ -136,6 +138,8 @@ public class gui_items implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		__info = items.getInstance();
 		__info.populate(cmb_items, false);
+		
+		__log = log.getInstance();
 		
         sl_break_chance.valueProperty().addListener(new ChangeListener<Object>() 
         {
