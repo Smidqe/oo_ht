@@ -18,7 +18,7 @@ public class o_log_struct {
 			this.__to = new SimpleStringProperty(__to);
 		}
 
-
+		//wish I knew how to properly use these.. oh well
 		public StringProperty timeProperty() {
 			return time;
 		}

@@ -37,7 +37,7 @@ public class smartpost
 	{
 		return __locations;
 	}
-	
+	//uses something magical called javascript, and somehow magically inserts a 
 	public void set_on_map(int index, WebEngine __engine)
 	{
 		if (__locations.get(index).added)
@@ -47,7 +47,7 @@ public class smartpost
 		
 		__builder.append("document.goToLocation('");
 		__builder.append(__locations.get(index).getAddress() + ", " + __locations.get(index).getZip_code() + " " + __locations.get(index).getCity() + "'"); //append the address!
-		__builder.append(", '' ,"); //skipping to the next parameter
+		__builder.append(", '" + __locations.get(index).getName() + ", " + __locations.get(index).getAddress() + "' ,"); //skipping to the next parameter
 		__builder.append("'red'"); //appending the color of the marker
 		__builder.append(")"); //and the ending of the whole string
 
@@ -55,6 +55,7 @@ public class smartpost
 		__locations.get(index).added = true;
 	}
 	
+	//add every location the combobox. if force then clear the items.
 	public void populate(ComboBox<String> b, boolean force)
 	{
 		if ((b.getItems().size() > 0) && !force)
@@ -68,10 +69,12 @@ public class smartpost
 		log.getInstance().entry("Paikkatiedot ladattu", true);
 	}
 	
+	//get all smartposts around Finland, the country where I want to be.
 	public void retrieve_all()
 	{
 		URL __url = null;
 
+		//form the url.
     	try {
 			__url = new URL("http://smartpost.ee/fi_apt.xml");
 		} catch (MalformedURLException e1) {
@@ -79,7 +82,7 @@ public class smartpost
 			e1.printStackTrace();
 		}
     	
-    	parser p = new parser();
+    	parser p = new parser(); //create a new parser
         
         try {
 			p.parse(new InputSource(__url.openStream()));
@@ -88,11 +91,13 @@ public class smartpost
 			e.printStackTrace();
 		}
         
-        log.getInstance().entry("Automaattien tiedot parsittu ja lisätty.", true);
+        log.getInstance().entry("Automaattien tiedot parsittu ja lisÃ¤tty.", true);
 	}
 	
+	//draws the red (is it?) to the map.
 	public double draw_path(WebEngine __engine, o_package pack)
 	{
+		//check if the start and end point are inserted to the map.
 		if (!(pack.get_from().added))
 			set_on_map(find(pack.get_from().getName(), false), __engine);
 		
@@ -101,6 +106,7 @@ public class smartpost
 		
 		StringBuilder __builder = new StringBuilder();
 		
+		//create the highly complex javascript function call.
 		__builder.append("document.createPath(");
 		
 		__builder.append("[" + pack.get_from().getGps_lat() + ", ");
@@ -114,7 +120,7 @@ public class smartpost
 		
 		__builder.append(")"); //and the ending of the whole string
 		
-		log.getInstance().entry("Piirretään reitti: " + pack.get_from().getName() + " - " + pack.get_to().getName(), true);
+		log.getInstance().entry("PiirretÃ¤Ã¤n reitti: " + pack.get_from().getName() + " - " + pack.get_to().getName(), true);
 		return (double) __engine.executeScript(__builder.toString());
 	}
 	
@@ -122,7 +128,8 @@ public class smartpost
 	{
 		__storage = storage.getInstance();
 		
-		if (__storage.__packages.size() == 0 || __index > __storage.__packages.size())
+		//if packages are 0 then return nothing otherwise take from then. Don't spare the poor.
+		if (__storage.get__packages().size() == 0 || __index > __storage.get__packages().size())
 			return null;
 		else
 			return __storage.take(__index);
@@ -134,6 +141,7 @@ public class smartpost
 		log.getInstance().entry("Kaikki piirretyt reitit pyyhitty.", true);
 	}
 
+	//find the smartpost by it's name
 	public o_smartpost find(String __name) {
 		if (__locations.size() <= 0)
 			return null;
@@ -147,6 +155,7 @@ public class smartpost
 		return null;
 	}
 
+	//find the smartpost and get it's index number.
 	public int find(String __name, boolean debug) {
 		if (__locations.size() <= 0)
 			return -1;

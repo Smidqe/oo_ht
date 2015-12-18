@@ -40,7 +40,7 @@ public class log {
 		return __files.exists();
 	}
 	
-	
+	//creates a new file, if it exists then destroy it and create a new one.
 	public boolean create()
 	{
 		if (__files.exists())
@@ -56,6 +56,7 @@ public class log {
 		return false;
 	}	
 
+	//write to a file.
 	private void write(double dist, o_package __package) {
 		if (!__files.exists())
 			return;
@@ -69,7 +70,7 @@ public class log {
 	}
 
 	private String getTime(boolean date) {
-		// TODO Auto-generated method stub
+		// gets the date or time depending on boolean date.
 		SimpleDateFormat df;
 		if (date)
 			df = new SimpleDateFormat("dd/MM/yy");
@@ -83,14 +84,16 @@ public class log {
 	
 	public void to_table(String __from, String __to, String __message)
 	{
+		//add the entry to the entries, and then insert all the entries to the table in second tab.
 		 __entries.add(new o_log_struct(getTime(true) + ", " + getTime(false), __message, __from, __to));
 		 __view.setItems(__entries);
 	}
 	
 	public void entry(double dist, o_package __package, boolean to_file, String __message) {
-		//decide what to do.
+		//add to the table
 		to_table(__package.get_from().getName(), __package.get_to().getName(), __message + dist);
 		
+		//add to the file aswell if possible.
 		if (to_file)
 			write(dist, __package);
 	}
@@ -107,6 +110,7 @@ public class log {
 		if (!__files.exists())
 			return;
 		
+		//write to the log.
 		try {
 			__files.write(getTime(true) + ", " + getTime(false) + ": " + __txt + '\n', true); //TODO: Finish this.
 		} catch (IOException e) {
@@ -114,4 +118,6 @@ public class log {
 			e.printStackTrace();
 		}
 	}
+	
+	//Welcome. You are now entering the end of this file. Here you will experience the relief of having no more lines to go through. But beware there are more to come on next file. Have fun.
 }

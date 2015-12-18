@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class files extends File
 {
-
+	//Eclipse requires this, not sure why... 
 	private static final long serialVersionUID = 1L;
 
 	String path;
@@ -36,10 +36,10 @@ public class files extends File
 		
 		this.path = path;
 		this.name = "";
-		// TODO Auto-generated constructor stub
 	}
 
-	public boolean exists()
+	//checks if the file exists and it's a file and not a directory.
+	public boolean exists() 
 	{
 		return __exists = super.exists() && isFile();
 	}
@@ -49,6 +49,7 @@ public class files extends File
 		if (!canWrite())
 			return false;
 		
+		//recreate the file if we don't want to append, bye bye.
 		if (!append && exists())
 		{
 			 delete();
@@ -68,6 +69,7 @@ public class files extends File
 		return true;
 	}
 	
+	//reads the file line by line and appends them to the arraylist.
 	public ArrayList<String> read() throws IOException
 	{
 		BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream(path)));

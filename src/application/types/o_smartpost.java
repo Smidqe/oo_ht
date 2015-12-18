@@ -1,5 +1,6 @@
 package application.types;
 
+import application.files.log;
 import application.storage.storage;
 
 public class o_smartpost
@@ -14,8 +15,6 @@ public class o_smartpost
 	private String gps_lng;
 	 
 	private storage __storage;
-	//TODO: Methods:
-
 	public boolean added;
 	
 	public o_smartpost()
@@ -25,30 +24,42 @@ public class o_smartpost
 	
 	public o_package get_package(int __index)
 	{
-		return __storage.__packages.get(__index);
+		if (__index < 0)
+			return null;
+		
+		return __storage.get__packages().get(__index);
 	}
 	
+	//returns the package if found by it's name.
 	public o_package get_package(String __name)
 	{
 		return get_package(find_package(__name, false));
 	}
 
+	//finds the package by it's name, and prints to the log if print is true
 	public int find_package(String __name, boolean print)
 	{
-		if (__storage.__packages.isEmpty())
+		if (__storage.get__packages().isEmpty())
 			return -1;
 		
 		int r = -1;
-		for (int i = 0; i < __storage.__packages.size(); i++)
-			if (__storage.__packages.get(i).getItem().name.equals(__name))
+		for (int i = 0; i < __storage.get__packages().size(); i++)
+			if (__storage.get__packages().get(i).getItem().name.equals(__name))
 			{
 				r = i;
+				
+				if (print)
+					log.getInstance().entry("Paketti: " + __name + " löytyi.", false);
 				break;
 			}
-
+		
+		if (print)
+			log.getInstance().entry("Paketti: " + __name + " ei löytynyt.", false);
+		
 		return r;
 	}
 	
+	//a wrapper for the previous function only accepts the name.
 	public boolean find_package(String __name)
 	{
 		return find_package(__name, false) != -1;

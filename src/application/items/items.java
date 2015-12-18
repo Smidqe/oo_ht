@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import application.files.files;
+import application.files.log;
 import application.types.o_item;
 import javafx.scene.control.ComboBox;
 
@@ -30,12 +31,13 @@ public class items {
 		__items.add(new o_item());
 	}
 	
-	
+	//load all the items from the file.
 	public boolean load(files __file)
 	{
 		if (!__file.exists() || !__file.canRead())
 			return false;
 		
+		//get all the lines from the file.
 		ArrayList<String> __lines = new ArrayList<String>();
 		try {
 			__lines = __file.read();
@@ -44,6 +46,7 @@ public class items {
 			e.printStackTrace();
 		}
 		
+		//parse the data to items.
 		for (int i = 0; i < __lines.size(); i++)
 		{
 			if (__lines.get(i).trim().isEmpty())
@@ -52,7 +55,6 @@ public class items {
 			String[] __split = __lines.get(i).split(",");
 			o_item __item = new o_item();
 			
-			System.out.println(__split);
 			for (int j = 0; j < __split.length; j++)
 				switch(j)
 				{
@@ -71,7 +73,7 @@ public class items {
 					case 3:
 					case 4: 
 					{
-						__item.size[j - 2] = Integer.parseInt(__split[j].replaceAll("\\[", "").replaceAll("\\]", "").split(",")[0].trim());
+						__item.size[j - 2] = Integer.parseInt(__split[j].replaceAll("\\[", "").replaceAll("\\]", "").split(",")[0].trim()); //get rid of the brackets!
 						break;
 					}
 					case 5: 
@@ -93,6 +95,7 @@ public class items {
 		return true;
 	}
 	
+	//save every item, recreate the file if necessary.
 	public boolean save(boolean overwrite) throws IOException
 	{
 		if (overwrite)
@@ -111,6 +114,7 @@ public class items {
 		return __instance;
 	}
 
+	//again add all items (names) to the combobox b use force if you need to.
 	public void populate(ComboBox<String> b, boolean force) {
 		if ((b.getItems().size() > 0) && !force)
 			return;
@@ -127,6 +131,7 @@ public class items {
 	}
 
 
+	//find the item.
 	public o_item find(String __name) {
 		if (list().size() <= 0)
 			return null;
@@ -137,7 +142,7 @@ public class items {
 				return list().get(i);
 		}
 		
-		System.out.println("No result");
+		log.getInstance().entry("Kyseistä esinettä ei löytynyt.", false);
 		
 		return null;
 	}

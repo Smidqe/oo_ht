@@ -1,5 +1,7 @@
 package application.types;
 
+import application.files.log;
+
 public class o_package
 {
 	private o_item item;
@@ -21,41 +23,82 @@ public class o_package
 	
 	private float max_distance;
 	
+    @Override
+	public String toString() {
+		return "o_package [item=" + item + ", name=" + name + ", __from=" + __from + ", __to=" + __to + ", __class="
+				+ __class + "]";
+	}
+
+    //calculates the bird's distance between two gps points. IT cannot into math.
+	public static double distance(double lat1, double lon1, double lat2, double lon2) {
+    	final double R = 6372.2;
+    	
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+ 
+        double a = Math.pow(Math.sin(dLat / 2),2) + Math.pow(Math.sin(dLon / 2),2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+
+        return R * c;
+    }
+	
+	//checks if the item fills the regulations, we don't want oddities in our storage!
 	public boolean fits(o_item __item, o_smartpost f, o_smartpost t, int __c)
 	{
+		//checks the distance if it's too far away.
+		if ((distance(Double.parseDouble(f.getGps_lat()), Double.parseDouble(f.getGps_lng()), Double.parseDouble(t.getGps_lat()), Double.parseDouble(t.getGps_lng()))) > 150 + (400 * (__c - 1)))
+		{
+			log.getInstance().entry("Etäisyys on liian pitkä: Luokka:" + __c, false);
+			return false;
+		}
 		
-		return false;
+		//checks the item dimensions.
+		if (((max_size[0] * __c) < __item.size[0]) || ((max_size[1] * __c) < __item.size[1]) || ((max_size[2] * __c) < __item.size[2]))
+		{
+			log.getInstance().entry("Objekti on liian suuri pakkaukseen: Luokka:" + __c, false);
+			return false;	
+		}	
+		return true;
 	}
 	
+	//sets the values for necessary variables, mainly increases as the class increases.
 	public void set_values(int c)
 	{	
-		for (int i = 0; i < 3; i++)
-			max_size[i] = max_size[i] * c;
+		if (c == 2)
+			for (int i = 0; i < 3; i++)
+				max_size[i] = 5;
+		else
+			for (int i = 0; i < 3; i++)
+				max_size[i] = max_size[i] * c;
 		
 		this.max_weight = (1 * 2 * c);
-		this.safety_rating = (float) (0.33 * c);
+		
+		if (c == 2)
+			this.safety_rating *= (float) 0.99;
+		else
+			this.safety_rating *= (float) (0.40 * c);
+		
 		this.max_speed = (float) (80.0 - (20 *  c));
-		this.max_distance = 150 + (400 * c);
+		this.max_distance = 150 + (400 * (c - 1));
 	}
 
 	public o_package(o_item __item, o_smartpost f, o_smartpost t, int c)
 	{
-		if (!fits(__item, f, t, c))
-			return;
-		
-		this.name = "Package: " + __item.name + ", Class: " + c;
+		this.name = "Paketti: Esine: " + __item.name + ", Luokka: " + c;
 		this.item = __item;
 		this.__from = f;
 		this.__to = t;
 		this.__class = c;
 		this.breakable = __item.breakable;
-		
-		for (int i = 0; i < 3; i++)
-			max_size[i] = max_size[i] * c;
-		
+		this.safety_rating = __item.durability / 100;
+
 		set_values(__class);
 	}
 
+	
+	//holy quacamole, that's a lot of setters and getters.
 	public o_item getItem() {
 		return item;
 	}

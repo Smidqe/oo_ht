@@ -20,6 +20,7 @@ public class handler extends DefaultHandler {
 		__smartpost = smartpost.getInstance();
 	}
 	
+	//check if the __value is the same as any of the values. sets boolean in index i if found to true.
 	@Override
 	public void startElement(String uri, String localName, String __value, Attributes attributes)	
 	{
@@ -29,6 +30,7 @@ public class handler extends DefaultHandler {
 			__bools[i] = __values[i].equals(__value);	
 	}
 
+	//clears all the booleans
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
     	int i;
@@ -37,17 +39,16 @@ public class handler extends DefaultHandler {
     		__bools[i] = false;
     }
 
+    //handles every situation when a single or none of the booleans is true.
     @Override
     public void characters(char ch[], int start, int length) throws SAXException 
     {
     	int i = 0;
-    	
+    	//should I say something here?
     	for (i = 0; i < __bools.length; i++)
     	{
     		if (__bools[i])
-    		{
-    			//TODO: Add the necessary checks here!
-    			
+    		{	
     			switch(i)
     			{
     				case 0:
@@ -90,11 +91,10 @@ public class handler extends DefaultHandler {
     					break;
     				}
     			}
-    			
-
     		}
     	}
     	
+    	//clear all the booleans to false
     	for (i = 0; i < __values.length; i++)
     		__bools[i] = false;
     }

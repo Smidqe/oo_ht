@@ -62,9 +62,11 @@ public class gui_items implements Initializable{
 		if (cmb_items.getValue() == null)
 			return;
 		
+		//refresh the item list after removing one.
 		__info.list().remove(cmb_items.getItems().indexOf(cmb_items.getValue()));
 		__info.populate(cmb_items, true);
 		
+		//save the information to the file. Gotta keep it updated.
 		try {
 			__info.save(true);
 		} catch (IOException e1) {
@@ -83,6 +85,7 @@ public class gui_items implements Initializable{
 		{
 			o_item f;
 			
+			//if we are creating a new item create a new one, otherwise load the existing item
 			if (cmb_items.getValue() != null)
 				f = __info.list().get(cmb_items.getItems().indexOf(cmb_items.getValue()));
 			else
@@ -95,17 +98,23 @@ public class gui_items implements Initializable{
 			if (f.breakable)
 				f.durability = (float) sl_break_chance.getValue();
 			
+			//split the size text to array of 3 and turn them into integers.
 			String[] __t = tf_size.getText().split("\\*");
-
 			for (int i = 0 ; i < f.size.length; i++)
 				f.size[i] = Integer.parseInt(__t[i].trim());
 
-			if (!e.getTarget().toString().equals("Button[id=btn_update, styleClass=button]'Päivitä'"))
+			//check if we are not pushing the update button, if we are don't create a new item!
+			if (!e.getTarget().toString().equals("Button[id=btn_update, styleClass=button]'PÃ¤ivitÃ¤'"))
 				__info.create(f);
 		
-			__log.entry("ITEMS: Added a new item: " + f.toString(), true);
+			//add a log entry.
+			__log.entry("ESINEET: Uusi esine luotu/pÃ¤ivitetty: " + f.toString(), true);
 			
+			//refill the combobox with items.
 			__info.populate(cmb_items, true);
+			
+			
+			//save the items again.
 			try {
 				__info.save(true);
 			} catch (IOException e1) {
@@ -118,20 +127,27 @@ public class gui_items implements Initializable{
 		}
 	}
 	
-	@FXML
+	//loads the item information and inserts them to the corresponding slots.
+	@FXML 
 	public void load_item_information(ActionEvent e)
 	{
 		if (cmb_items.getValue() == null)
 			return;
 		
+		//find the item.
 		o_item f = __info.list().get(cmb_items.getItems().indexOf(cmb_items.getValue()));
 		
+		//set the text's
 		tf_name.setText(f.name);
 		tf_size.setText(f.size[0] + "*" + f.size[1] + "*" + f.size[2]);
 		tf_weight.setText(Float.toString(f.weight));
 		
+		//set the breakable and the slider to the corresponding values
 		rb_break.setSelected(f.breakable);
 		sl_break_chance.setDisable(!rb_break.isSelected());
+		sl_break_chance.setValue((double) f.durability);
+        lbl_break.setText("Hajoamisen mahdollisuus: " + String.format("%.2f", sl_break_chance.getValue()));
+
 	}
 
 	@Override
@@ -141,6 +157,7 @@ public class gui_items implements Initializable{
 		
 		__log = log.getInstance();
 		
+		//add a listener to the break chance slider.
         sl_break_chance.valueProperty().addListener(new ChangeListener<Object>() 
         {
                 @Override
@@ -151,7 +168,7 @@ public class gui_items implements Initializable{
                 
         });
         
-        
+        //add a listener to the combobox, everytime it's value changes you get it's properties.
         cmb_items.valueProperty().addListener(new ChangeListener<Object>() 
         {
                 @Override

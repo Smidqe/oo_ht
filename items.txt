@@ -1,0 +1,5 @@
+MLP-figuuri, 0.2, [5, 5, 5], 0.0, false
+Anna-nukke, 2.0, [20, 30, 30], 0.0, false
+Nexcuus 9X, 0.8, [20, 30, 2], 30.0, true
+RPI lasikuutio, 0.9, [20, 30, 2], 90.0, true
+Tetst, 0.9, [20, 30, 2], 50.0, true

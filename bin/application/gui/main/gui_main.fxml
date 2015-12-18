@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.main.gui_main">
    <children>
-      <TabPane id="tab_main" layoutY="-212.0" prefHeight="612.0" prefWidth="600.0" style="-fx-background-insets: 0; -fx-padding: -5,; -fx-pref-height: 2;" styleClass="tab_css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane id="tab_main" layoutY="-212.0" prefHeight="612.0" prefWidth="600.0" styleClass="tab_css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab closable="false" style="-fx-padding: 0 30 0 30;" text="Kartta">
                <content>
@@ -49,10 +49,8 @@
                <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btn_save" layoutY="379.0" mnemonicParsing="false" onAction="#action_save_to_file" prefHeight="40.0" prefWidth="90.0" text="Tallenna" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-                        <Button fx:id="btn_load" layoutX="75.0" layoutY="379.0" mnemonicParsing="false" onAction="#action_load_from_file" prefHeight="40.0" prefWidth="90.0" text="Lataa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="90.0" />
                         <Label fx:id="label_error" layoutX="158.0" layoutY="563.0" prefHeight="40.0" prefWidth="692.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <TableView fx:id="tbl_log" prefHeight="564.0" prefWidth="850.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tbl_log" prefHeight="564.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn fx:id="tb_time" prefWidth="176.0" text="Ajankohta" />
                             <TableColumn fx:id="tb_from" minWidth="0.0" prefWidth="145.0" text="Lähtöpaikka" />
@@ -62,14 +60,7 @@
                         </TableView>
                      </children></AnchorPane>
                </content></Tab>
-            <Tab closable="false" disable="true" style="-fx-padding: 0 30 0 30;" text="Secret project" />
         </tabs>
       </TabPane>
-      <MenuButton fx:id="button_menu" alignment="CENTER" contentDisplay="RIGHT" layoutX="523.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" text="Valikko" textOverrun="CLIP" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-            <MenuItem fx:id="menu_button_settings" mnemonicParsing="false" text="Asetukset" />
-          <MenuItem fx:id="menu_button_close" mnemonicParsing="false" onAction="#action_close" text="Sulje" />
-        </items>
-      </MenuButton>
    </children>
 </AnchorPane>
